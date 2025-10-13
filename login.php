@@ -25,19 +25,46 @@ if (isset($_POST['login'])) {
 <head>
     <title>Login</title>
     <style>
-        body {font-family: Arial; background: #f2f2f2; display:flex; justify-content:center; align-items:center; height:100vh;}
-        form {background:#fff; padding:30px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1);}
-        input {display:block; width:100%; margin-bottom:10px; padding:10px;}
-        button {padding:10px; width:100%; background:#007bff; color:white; border:none; border-radius:5px;}
-        .error {color:red; text-align:center;}
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <form method="POST" action="">
+    <form method="POST" action="" autocomplete="off">
         <h2>Login</h2>
         <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
-        <input type="text" name="username" placeholder="Username" required autofocus>
-        <input type="password" name="password" placeholder="Password" required>
+        <input type="text" name="username" placeholder="Username" autocomplete="off" required>
+        <input type="password" name="password" placeholder="Password" autocomplete="new-password" required>
         <button type="submit" name="login">Masuk</button>
     </form>
 </body>
