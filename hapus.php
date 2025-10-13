@@ -1,13 +1,20 @@
 <?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
 include "koneksi.php";
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $query = mysqli_query($koneksi, "DELETE FROM bioskop WHERE id='$id'");
+$status = ""; // Default status kosong
+
+if (isset($_GET['No_hp'])) {
+    $id = mysqli_real_escape_string($koneksi, $_GET['No_hp']); // Hindari SQL injection
+
+    $query = mysqli_query($koneksi, "DELETE FROM bioskop WHERE No_hp='$id'");
 
     $status = $query ? "success" : "error";
-} else {
-    $status = "invalid";
 }
 ?>
 <!DOCTYPE html>
@@ -35,21 +42,10 @@ if (isset($_GET['id'])) {
             text-align: center;
             width: 350px;
         }
-        h2 {
-            margin-bottom: 10px;
-            color: #333;
-        }
-        p {
-            font-size: 15px;
-        }
-        .success {
-            color: green;
-            font-weight: bold;
-        }
-        .error {
-            color: red;
-            font-weight: bold;
-        }
+        h2 { margin-bottom: 10px; color: #333; }
+        p { font-size: 15px; }
+        .success { color: green; font-weight: bold; }
+        .error { color: red; font-weight: bold; }
         .btn {
             display: inline-block;
             margin-top: 15px;
@@ -60,9 +56,7 @@ if (isset($_GET['id'])) {
             text-decoration: none;
             transition: 0.3s;
         }
-        .btn:hover {
-            background: #1a5edb;
-        }
+        .btn:hover { background: #1a5edb; }
     </style>
 </head>
 <body>
@@ -74,8 +68,8 @@ if (isset($_GET['id'])) {
             <h2>Gagal ❌</h2>
             <p class="error">Data gagal dihapus!</p>
         <?php else: ?>
-            <h2>Ups ⚠️</h2>
-            <p class="error">ID tidak ditemukan!</p>
+            <h2>Ups ⚠</h2>
+            <p class="error">No HP tidak ditemukan atau tidak dikirim!</p>
         <?php endif; ?>
         <a href="index.php" class="btn">← Kembali ke Data</a>
     </div>

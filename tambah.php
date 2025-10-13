@@ -1,16 +1,32 @@
 <?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
 include "koneksi.php";
 
-$message = "";
+$message = "";  // Inisialisasi pesan
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $film     = $_POST['film'];
-    $jadwal   = $_POST['jadwal'];
-    $penonton = $_POST['penonton'];
-    $tiket    = $_POST['tiket'];
+    $film    = $_POST['film'];
+    $Jadwal   = $_POST['Jadwal'];
+    $Penonton = $_POST['Penonton'];
+    $Tiket    = $_POST['Tiket'];
+    $No_hp = $_POST['No_hp'];
+    $Umur    = $_POST['Umur'];
 
-    $query = mysqli_query($koneksi, "INSERT INTO bioskop (film, jadwal, penonton, tiket) 
-                                     VALUES ('$film', '$jadwal', '$penonton', '$tiket')");
+    // Escape data untuk keamanan (minimal)
+    $film = mysqli_real_escape_string($koneksi, $film);
+    $Jadwal = mysqli_real_escape_string($koneksi, $Jadwal);
+    $Penonton = mysqli_real_escape_string($koneksi, $Penonton);
+    $Tiket = mysqli_real_escape_string($koneksi, $Tiket);
+    $No_hp = mysqli_real_escape_string($koneksi, $No_hp);
+    $Umur = mysqli_real_escape_string($koneksi, $Umur);
+
+    $query = mysqli_query($koneksi, "INSERT INTO bioskop (Film, Jadwal, Penonton, Tiket, No_hp, Umur) 
+                                     VALUES ('$film', '$Jadwal', '$Penonton', '$Tiket', '$No_hp', '$Umur')");
     if ($query) {
         $message = "success";
     } else {
@@ -21,10 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tambah Data Bioskop</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea, #764ba2);
@@ -117,16 +134,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <form action="" method="POST">
             <div class="input-group">
-                <input type="text" name="film" placeholder="Judul Film" required>
+                <input type="text" name="film" placeholder="Film" required />
             </div>
             <div class="input-group">
-                <input type="datetime-local" name="jadwal" required>
+                <input type="datetime-local" name="Jadwal" required />
             </div>
             <div class="input-group">
-                <input type="text" name="penonton" placeholder="Nama Penonton" required>
+                <input type="text" name="Penonton" placeholder="Penonton" required />
             </div>
             <div class="input-group">
-                <input type="text" name="tiket" placeholder="Kode Tiket" required>
+                <input type="text" name="Tiket" placeholder="Tiket" required />
+            </div>
+            <div class="input-group">
+                <input type="text" name="No_hp" placeholder="No_hp" required />
+            </div>
+            <div class="input-group">
+                <input type="text" name="Umur" placeholder="Umur" required />
             </div>
             <button type="submit" class="btn">Simpan</button>
         </form>
