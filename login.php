@@ -5,18 +5,19 @@ error_reporting(E_ALL);
 include 'koneksi.php';
 
 if (isset($_POST['login'])) {
-    $username = mysqli_real_escape_string($koneksi, $_POST['admin']);
-    $password = md5($_POST['12345']);  // md5, bisa diganti password_hash
+    $username = mysqli_real_escape_string($koneksi, $_POST['username']);
+    $password = md5($_POST['password']);  // md5, bisa diganti password_hash
 
     $query = "SELECT * FROM user WHERE username='$username' AND password='$password'";
     $result = mysqli_query($koneksi, $query);
 
     if (mysqli_num_rows($result) > 0) {
-        $_SESSION['admin'] = $username;
+        $_SESSION['username'] = $username;
         header("Location: index.php");
         exit;
     } else {
-        $error = "Username atau password salah!";
+        $error = "Username atau passwo
+        rd salah!";
     }
 }
 ?>
