@@ -6,33 +6,34 @@ session_start();
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
-} 
+}
+
 include 'koneksi.php';
 
-// Gunakan id sebagai primary key
+// Cek id
 if (!isset($_GET['id'])) {
     die("ID tidak ditemukan!");
 }
 
 $id = mysqli_real_escape_string($koneksi, $_GET['id']);
 
-// Ambil data berdasarkan id
+// Ambil data dari database
 $query = mysqli_query($koneksi, "SELECT * FROM bioskop WHERE id='$id'");
 $data = mysqli_fetch_assoc($query);
 
 if (!$data) {
-    die("Data tidak ditemukan!");
+    die("Data dengan ID $id tidak ditemukan!");
 }
 
+// Jika tombol update ditekan
 if (isset($_POST['update'])) {
-    $Film       = $_POST['Film'];
-    $Jadwal     = $_POST['Jadwal'];
-    $Penonton   = $_POST['Penonton'];
-    $Tiket      = $_POST['Tiket'];
-    $No_hp      = $_POST['No_hp'];
-    $Umur       = $_POST['Umur'];
+    $Film       = mysqli_real_escape_string($koneksi, $_POST['Film']);
+    $Jadwal     = mysqli_real_escape_string($koneksi, $_POST['Jadwal']);
+    $Penonton   = mysqli_real_escape_string($koneksi, $_POST['Penonton']);
+    $Tiket      = mysqli_real_escape_string($koneksi, $_POST['Tiket']);
+    $No_hp      = mysqli_real_escape_string($koneksi, $_POST['No_hp']);
+    $Umur       = mysqli_real_escape_string($koneksi, $_POST['Umur']);
 
-    // Update berdasarkan id
     $update = mysqli_query($koneksi, "UPDATE bioskop SET 
                 Film='$Film', 
                 Jadwal='$Jadwal', 
@@ -44,8 +45,9 @@ if (isset($_POST['update'])) {
 
     if ($update) {
         echo "<script>alert('Data berhasil diupdate!'); window.location='index.php';</script>";
+        exit();
     } else {
-        echo "Gagal update: " . mysqli_error($koneksi);
+        die("Gagal update: " . mysqli_error($koneksi));
     }
 }
 ?>
@@ -66,32 +68,32 @@ if (isset($_POST['update'])) {
     <form method="POST">
       <div class="mb-3">
         <label class="form-label">Film</label>
-        <input type="text" class="form-control" name="Film" value="<?= htmlspecialchars($data['Film']); ?>">
+        <input type="text" class="form-control" name="Film" value="<?= htmlspecialchars($data['Film'] ?? ''); ?>">
       </div>
 
       <div class="mb-3">
         <label class="form-label">Jadwal</label>
-        <input type="text" class="form-control" name="Jadwal" value="<?= htmlspecialchars($data['Jadwal']); ?>">
+        <input type="text" class="form-control" name="Jadwal" value="<?= htmlspecialchars($data['Jadwal'] ?? ''); ?>">
       </div>
 
       <div class="mb-3">
         <label class="form-label">Penonton</label>
-        <input type="text" class="form-control" name="Penonton" value="<?= htmlspecialchars($data['Penonton']); ?>">
+        <input type="text" class="form-control" name="Penonton" value="<?= htmlspecialchars($data['Penonton'] ?? ''); ?>">
       </div>
 
       <div class="mb-3">
         <label class="form-label">Tiket</label>
-        <input type="text" class="form-control" name="Tiket" value="<?= htmlspecialchars($data['Tiket']); ?>">
+        <input type="text" class="form-control" name="Tiket" value="<?= htmlspecialchars($data['Tiket'] ?? ''); ?>">
       </div>
 
       <div class="mb-3">
         <label class="form-label">No HP</label>
-        <input type="text" class="form-control" name="No_hp" value="<?= htmlspecialchars($data['No_hp']); ?>">
+        <input type="text" class="form-control" name="No_hp" value="<?= htmlspecialchars($data['No_hp'] ?? ''); ?>">
       </div>
 
       <div class="mb-3">
         <label class="form-label">Umur</label>
-        <input type="text" class="form-control" name="Umur" value="<?= htmlspecialchars($data['Umur']); ?>">
+        <input type="text" class="form-control" name="Umur" value="<?= htmlspecialchars($data['Umur'] ?? ''); ?>">
       </div>
 
       <button type="submit" name="update" class="btn btn-primary w-100">Update</button>
