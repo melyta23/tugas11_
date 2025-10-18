@@ -6,7 +6,7 @@ include 'koneksi.php';
 
 if (isset($_POST['login'])) {
     $username = mysqli_real_escape_string($koneksi, $_POST['username']);
-    $password = md5($_POST['password']);  // md5, bisa diganti password_hash
+    $password = md5($_POST['password']);  // md5, sesuaikan dengan yang ada di DB
 
     $query = "SELECT * FROM user WHERE username='$username' AND password='$password'";
     $result = mysqli_query($koneksi, $query);
@@ -16,8 +16,7 @@ if (isset($_POST['login'])) {
         header("Location: index.php");
         exit;
     } else {
-        $error = "Username atau passwo
-        rd salah!";
+        $error = "Username atau password salah!";
     }
 }
 ?>
