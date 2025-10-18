@@ -93,10 +93,10 @@ if (!$query) {
             <td><?= htmlspecialchars($data['No_hp']); ?></td>
             <td><?= htmlspecialchars($data['Umur']); ?></td>
             <td>
-              <a href="ubah.php?No_hp=<?= urlencode($data['No_hp']); ?>" class="btn btn-warning btn-sm">
+              <a href="ubah.php?id=<?= $data['id']; ?>" class="btn btn-warning btn-sm">
                 <i class="bi bi-pencil-square"></i> Ubah
               </a>
-              <a href="hapus.php?No_hp=<?= urlencode($data['No_hp']); ?>" 
+              <a href="hapus.php?id=<?= $data['id']; ?>" 
                  onclick="return confirm('Yakin hapus data ini?')" 
                  class="btn btn-danger btn-sm">
                 <i class="bi bi-trash"></i> Hapus
