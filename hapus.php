@@ -9,12 +9,16 @@ include "koneksi.php";
 
 $status = ""; // Default status kosong
 
-if (isset($_GET['No_hp'])) {
-    $id = mysqli_real_escape_string($koneksi, $_GET['No_hp']); // Hindari SQL injection
+if (isset($_GET['id'])) {  // Ganti dari No_hp ke id
+    $id = mysqli_real_escape_string($koneksi, $_GET['id']); // Aman dari SQL injection
 
-    $query = mysqli_query($koneksi, "DELETE FROM bioskop WHERE No_hp='$id'");
+    $query = mysqli_query($koneksi, "DELETE FROM bioskop WHERE id='$id'");
 
     $status = $query ? "success" : "error";
+
+    if (!$query) { // Debug jika query gagal
+        echo "Error: " . mysqli_error($koneksi);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -69,7 +73,7 @@ if (isset($_GET['No_hp'])) {
             <p class="error">Data gagal dihapus!</p>
         <?php else: ?>
             <h2>Ups ⚠</h2>
-            <p class="error">No HP tidak ditemukan atau tidak dikirim!</p>
+            <p class="error">ID tidak ditemukan atau tidak dikirim!</p>
         <?php endif; ?>
         <a href="index.php" class="btn">← Kembali ke Data</a>
     </div>
