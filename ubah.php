@@ -10,14 +10,12 @@ if (!isset($_SESSION['username'])) {
 
 include 'koneksi.php';
 
-// Cek id
 if (!isset($_GET['id'])) {
     die("ID tidak ditemukan!");
 }
 
 $id = mysqli_real_escape_string($koneksi, $_GET['id']);
 
-// Ambil data dari database
 $query = mysqli_query($koneksi, "SELECT * FROM bioskop WHERE id='$id'");
 $data = mysqli_fetch_assoc($query);
 
@@ -25,7 +23,6 @@ if (!$data) {
     die("Data dengan ID $id tidak ditemukan!");
 }
 
-// Jika tombol update ditekan
 if (isset($_POST['update'])) {
     $Film       = mysqli_real_escape_string($koneksi, $_POST['Film']);
     $Jadwal     = mysqli_real_escape_string($koneksi, $_POST['Jadwal']);
