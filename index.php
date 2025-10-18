@@ -73,10 +73,10 @@ if (!$query) {
     <table class="table table-bordered text-center align-middle">
       <thead class="table-primary">
         <tr>
-          <th>Film</th>
-          <th>Jadwal</th>
-          <th>Penonton</th>
-          <th>Tiket</th>
+          <th>film</th>
+          <th>jadwal</th>
+          <th>penonton</th>
+          <th>tiket</th>
           <th>No HP</th>
           <th>Umur</th>
           <th>Aksi</th>
@@ -86,10 +86,10 @@ if (!$query) {
         <?php if (mysqli_num_rows($query) > 0): ?>
           <?php while($data = mysqli_fetch_assoc($query)) { ?>
           <tr>
-            <td><?= htmlspecialchars($data['Film']); ?></td>
-            <td><?= htmlspecialchars($data['Jadwal']); ?></td>
-            <td><?= htmlspecialchars($data['Penonton']); ?></td>
-            <td><?= htmlspecialchars($data['Tiket']); ?></td>
+            <td><?= htmlspecialchars($data['film']); ?></td>
+            <td><?= htmlspecialchars($data['jadwal']); ?></td>
+            <td><?= htmlspecialchars($data['penonton']); ?></td>
+            <td><?= htmlspecialchars($data['tiket']); ?></td>
             <td><?= htmlspecialchars($data['No_hp']); ?></td>
             <td><?= htmlspecialchars($data['Umur']); ?></td>
             <td>

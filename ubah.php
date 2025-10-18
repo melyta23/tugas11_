@@ -24,18 +24,18 @@ if (!$data) {
 }
 
 if (isset($_POST['update'])) {
-    $Film       = mysqli_real_escape_string($koneksi, $_POST['Film']);
-    $Jadwal     = mysqli_real_escape_string($koneksi, $_POST['Jadwal']);
-    $Penonton   = mysqli_real_escape_string($koneksi, $_POST['Penonton']);
-    $Tiket      = mysqli_real_escape_string($koneksi, $_POST['Tiket']);
+    $film       = mysqli_real_escape_string($koneksi, $_POST['film']);
+    $jadwal     = mysqli_real_escape_string($koneksi, $_POST['jadwal']);
+    $penonton   = mysqli_real_escape_string($koneksi, $_POST['penonton']);
+    $tiket      = mysqli_real_escape_string($koneksi, $_POST['tiket']);
     $No_hp      = mysqli_real_escape_string($koneksi, $_POST['No_hp']);
     $Umur       = mysqli_real_escape_string($koneksi, $_POST['Umur']);
 
     $update = mysqli_query($koneksi, "UPDATE bioskop SET 
-                Film='$Film', 
-                Jadwal='$Jadwal', 
-                Penonton='$Penonton', 
-                Tiket='$Tiket',
+                film='$film', 
+                jadwal='$jadwal', 
+                penonton='$penonton', 
+                tiket='$tiket',
                 No_hp='$No_hp',
                 Umur='$Umur'
               WHERE id='$id'");
@@ -64,23 +64,23 @@ if (isset($_POST['update'])) {
     
     <form method="POST">
       <div class="mb-3">
-        <label class="form-label">Film</label>
-        <input type="text" class="form-control" name="Film" value="<?= htmlspecialchars($data['Film'] ?? ''); ?>">
+        <label class="form-label">film</label>
+        <input type="text" class="form-control" name="film" value="<?= htmlspecialchars($data['film'] ?? ''); ?>">
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Jadwal</label>
-        <input type="text" class="form-control" name="Jadwal" value="<?= htmlspecialchars($data['Jadwal'] ?? ''); ?>">
+        <label class="form-label">jadwal</label>
+        <input type="text" class="form-control" name="jadwal" value="<?= htmlspecialchars($data['jadwal'] ?? ''); ?>">
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Penonton</label>
-        <input type="text" class="form-control" name="Penonton" value="<?= htmlspecialchars($data['Penonton'] ?? ''); ?>">
+        <label class="form-label">penonton</label>
+        <input type="text" class="form-control" name="penonton" value="<?= htmlspecialchars($data['penonton'] ?? ''); ?>">
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Tiket</label>
-        <input type="text" class="form-control" name="Tiket" value="<?= htmlspecialchars($data['Tiket'] ?? ''); ?>">
+        <label class="form-label">tiket</label>
+        <input type="text" class="form-control" name="tiket" value="<?= htmlspecialchars($data['tiket'] ?? ''); ?>">
       </div>
 
       <div class="mb-3">

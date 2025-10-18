@@ -19,14 +19,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Escape data untuk keamanan (minimal)
     $film = mysqli_real_escape_string($koneksi, $film);
-    $Jadwal = mysqli_real_escape_string($koneksi, $Jadwal);
-    $Penonton = mysqli_real_escape_string($koneksi, $Penonton);
-    $Tiket = mysqli_real_escape_string($koneksi, $Tiket);
+    $jadwal = mysqli_real_escape_string($koneksi, $jadwal);
+    $penonton = mysqli_real_escape_string($koneksi, $penonton);
+    $tiket = mysqli_real_escape_string($koneksi, $tiket);
     $No_hp = mysqli_real_escape_string($koneksi, $No_hp);
     $Umur = mysqli_real_escape_string($koneksi, $Umur);
 
-    $query = mysqli_query($koneksi, "INSERT INTO bioskop (Film, Jadwal, Penonton, Tiket, No_hp, Umur) 
-                                     VALUES ('$film', '$Jadwal', '$Penonton', '$Tiket', '$No_hp', '$Umur')");
+    $query = mysqli_query($koneksi, "INSERT INTO bioskop (film, jadwal, penonton, tiket, No_hp, Umur) 
+                                     VALUES ('$film', '$jadwal', '$penonton', '$tiket', '$No_hp', '$Umur')");
     if ($query) {
         $message = "success";
     } else {
@@ -134,16 +134,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <form action="" method="POST">
             <div class="input-group">
-                <input type="text" name="film" placeholder="Film" required />
+                <input type="text" name="film" placeholder="film" required />
             </div>
             <div class="input-group">
-                <input type="datetime-local" name="Jadwal" required />
+                <input type="datetime-local" name="jadwal" required />
             </div>
             <div class="input-group">
-                <input type="text" name="Penonton" placeholder="Penonton" required />
+                <input type="text" name="penonton" placeholder="penonton" required />
             </div>
             <div class="input-group">
-                <input type="text" name="Tiket" placeholder="Tiket" required />
+                <input type="text" name="tiket" placeholder="tiket" required />
             </div>
             <div class="input-group">
                 <input type="text" name="No_hp" placeholder="No_hp" required />
