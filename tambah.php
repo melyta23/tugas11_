@@ -10,12 +10,13 @@ include "koneksi.php";
 $message = "";  // Inisialisasi pesan
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $film    = $_POST['film'];
-    $Jadwal   = $_POST['Jadwal'];
-    $Penonton = $_POST['Penonton'];
-    $Tiket    = $_POST['Tiket'];
-    $No_hp = $_POST['No_hp'];
-    $Umur    = $_POST['Umur'];
+    // Ambil data dari form (huruf kecil semua sesuai dengan name di input)
+    $film     = $_POST['film'];
+    $jadwal   = $_POST['jadwal'];
+    $penonton = $_POST['penonton'];
+    $tiket    = $_POST['tiket'];
+    $No_hp    = $_POST['No_hp'];
+    $Umur     = $_POST['Umur'];
 
     // Escape data untuk keamanan (minimal)
     $film = mysqli_real_escape_string($koneksi, $film);
@@ -25,12 +26,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $No_hp = mysqli_real_escape_string($koneksi, $No_hp);
     $Umur = mysqli_real_escape_string($koneksi, $Umur);
 
+    // Query simpan data
     $query = mysqli_query($koneksi, "INSERT INTO bioskop (film, jadwal, penonton, tiket, No_hp, Umur) 
                                      VALUES ('$film', '$jadwal', '$penonton', '$tiket', '$No_hp', '$Umur')");
+
     if ($query) {
         $message = "success";
     } else {
         $message = "error";
+        // Aktifkan baris di bawah ini kalau mau lihat error MySQL-nya
+        // echo "Error: " . mysqli_error($koneksi);
     }
 }
 ?>
